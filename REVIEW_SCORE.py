@@ -69,7 +69,7 @@ star1 = [j for i, j in enumerate(reviews['Reviews']) if -0.6 >= reviews['compoun
 
 avg_star = (5*len(star5) + 4*len(star4) + 3*len(star3) + 2*len(star2) + 1*len(star1)) / (len(star1)+len(star2)+len(star3)+len(star4)+len(star5))
 
-    
+print(avg_star)
     
     
     
