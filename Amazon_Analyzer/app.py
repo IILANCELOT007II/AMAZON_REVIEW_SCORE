@@ -11,7 +11,6 @@ from urllib.error import HTTPError
  
 @st.cache()
   
-# defining the function which will make the prediction using the data which the user inputs 
 def prediction(URL):
     
     review=[]
@@ -81,19 +80,16 @@ def prediction(URL):
     return avg_star
 
 def main():       
-    # front end elements of the web page 
     html_temp = """ 
     <div style ="background-color:yellow;padding:13px"> 
     <h1 style ="color:black;text-align:center;">AMAZON REVIEW SCORE</h1> 
     </div> 
     """
       
-    # display the front end aspect
     st.markdown(html_temp, unsafe_allow_html = True) 
       
     URL = st.text_input("Enter Amazon Product Link:")
       
-    # when 'Predict' is clicked, make the prediction and store it 
     if st.button("Predict"): 
         result = prediction(URL) 
         if(int(result) != -2):
