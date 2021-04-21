@@ -7,10 +7,12 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.request
 from urllib.error import HTTPError
-nltk.downloader.download('vader_lexicon')
-
 import pandas as pd
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import nltk
+nltk.downloader.download('vader_lexicon')
+
+
  
 @st.cache()
   
