@@ -16,6 +16,8 @@ from bs4 import BeautifulSoup
 
 import urllib.request
 
+from urllib.error import HTTPError
+
 
 
 
@@ -26,7 +28,7 @@ import urllib.request
 
 # defining the function which will make the prediction using the data which the user inputs 
 
-def prediction(ASIN):
+def prediction(URL):
 
     
 
@@ -36,15 +38,33 @@ def prediction(ASIN):
 
     
 
+    l1 = URL.split("/")
+
+    key = l1.index("dp")
+
+    asin = l1[key+1]
+
     
 
     for i in range(2,5):
 
-        url = "https://www.amazon.in/product-reviews/%s/ref=cm_cr_arp_d_paging_btm_next_%s?ie=UTF8&reviewerType=all_reviews&pageNumber=%s"%(ASIN, i, i)
+        try:
 
-        url_access = urllib.request.urlopen(url)
+            url = "https://www.amazon.in/product-reviews/%s/ref=cm_cr_arp_d_paging_btm_next_%s?ie=UTF8&reviewerType=all_reviews&pageNumber=%s"%(asin, i, i)
 
-        print(url)
+            url_access = urllib.request.urlopen(url)
+
+        
+
+        
+
+        except HTTPError as e:
+
+            if(str(e) == "HTTP Error 404: Not Found" ):
+
+                return -2
+
+        
 
         
 
@@ -52,15 +72,9 @@ def prediction(ASIN):
 
         
 
-        
-
-        
-
         for i in scraper.find_all('span', attrs={'class':'a-size-base review-text review-text-content'}):
 
             per_review = i.find('span')
-
-            print(per_review)
 
             review.append(per_review)
 
@@ -81,8 +95,6 @@ def prediction(ASIN):
             clean = clean.replace('<span>','')
 
             clean = clean.replace('</span>','')
-
-            print(clean)
 
             clean_review.append(clean)
 
@@ -174,9 +186,7 @@ def main():
 
     
 
-    ASIN = st.text_input("Amazon Standard Identification Number")
-
-    result =""
+    URL = st.text_input("Enter Amazon Product Link:")
 
     
 
@@ -184,9 +194,17 @@ def main():
 
     if st.button("Predict"): 
 
-        result = prediction(ASIN) 
+        result = prediction(URL) 
 
-        st.success('Product Score is {:.1f} stars'.format(result))
+        if(int(result) != -2):
+
+            st.success('Product Score is {:.1f} stars'.format(result))
+
+        else:
+
+            st.success('Product Not Found!')
+
+
 
 
 
