@@ -7,4 +7,4 @@
  The only input in this program is the URL of the product of your wish.
  
  Check it out!!!
- https://share.streamlit.io/iilancelot007ii/amazon_review_score/main/Amazon_Analyzer/app.py
+https://share.streamlit.io/iilancelot007ii/amazon_review_score/main/Amazon_Analyzer/app.py
