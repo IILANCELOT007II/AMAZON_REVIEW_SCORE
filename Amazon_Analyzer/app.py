@@ -1,5 +1,9 @@
 
 
+import sys
+
+from streamlit import cli as stcli
+
 import pickle
 
 import streamlit as st
@@ -34,17 +38,13 @@ def prediction(ASIN):
 
     
 
-    
-
-    
-
-    
-
     for i in range(2,5):
 
         url = "https://www.amazon.in/product-reviews/%s/ref=cm_cr_arp_d_paging_btm_next_%s?ie=UTF8&reviewerType=all_reviews&pageNumber=%s"%(ASIN, i, i)
 
         url_access = urllib.request.urlopen(url)
+
+        print(url)
 
         
 
@@ -160,7 +160,7 @@ def main():
 
     <div style ="background-color:yellow;padding:13px"> 
 
-    <h1 style ="color:black;text-align:center;">AMAZON REVIEW ANALYZER</h1> 
+    <h1 style ="color:black;text-align:center;">AMAZON REVIEW SCORE</h1> 
 
     </div> 
 
@@ -174,7 +174,7 @@ def main():
 
     
 
-    ASIN = st.text_input("Enter the Amazon Standard Identification Number:")
+    ASIN = st.text_input("Amazon Standard Identification Number")
 
     result =""
 
@@ -187,6 +187,8 @@ def main():
         result = prediction(ASIN) 
 
         st.success('Product Score is {:.1f} stars'.format(result))
+
+
 
 
 
