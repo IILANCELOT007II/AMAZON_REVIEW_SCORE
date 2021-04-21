@@ -7,7 +7,7 @@ import requests
 from bs4 import BeautifulSoup
 import urllib.request
 from urllib.error import HTTPError
-
+nltk.downloader.download('vader_lexicon')
  
 @st.cache()
   
