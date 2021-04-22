@@ -106,14 +106,15 @@ def main():
             st.warning("Please enter a valid Amazon URL")
             st.stop()
         result = prediction(URL) 
-        if(int(result) != -2):
-            st.success('Product Score is {:.1f} stars'.format(result))
+        if(int(result) == -2):
+            st.warning('Product Not Found!')
+            st.stop()
         elif(int(result) == -3):
            st.warning('Something went wrong please try again')
            st.stop()
         else:
-            st.warning('Product Not Found!')
-            st.stop()
+            st.success('Product Score is {:.1f} stars'.format(result))
+            
     
     
      
