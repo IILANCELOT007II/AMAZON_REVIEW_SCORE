@@ -100,16 +100,20 @@ def main():
     if st.button("Predict"): 
         if(len(URL)==0):
             st.warning("Please enter a URL")
+            st.stop()
     
-        if('amazon' not in URL):
-            st.warning("Please enter a valid Amazon URL")  
+        if('amazon' not in URL and len(URL)!=0):
+            st.warning("Please enter a valid Amazon URL")
+            st.stop()
         result = prediction(URL) 
         if(int(result) != -2):
             st.success('Product Score is {:.1f} stars'.format(result))
         elif(int(result) == -3):
            st.warning('Something went wrong please try again')
+           st.stop()
         else:
             st.warning('Product Not Found!')
+            st.stop()
     
     
      
