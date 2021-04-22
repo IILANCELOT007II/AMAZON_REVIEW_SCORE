@@ -34,6 +34,7 @@ def prediction(URL):
         except HTTPError as e:
             if(str(e) == "HTTP Error 404: Not Found" ):
                 return -2
+            return -3
         
         
         scraper = BeautifulSoup(url_access,'html.parser')
@@ -94,11 +95,18 @@ def main():
     st.markdown(html_temp, unsafe_allow_html = True) 
       
     URL = st.text_input("Enter Amazon Product Link:")
+    if(len(URL)==0):
+        st.success("Please enter a URL")
+      
+    if('amazon' not in URL):
+        st.success("Please enter a valid Amazon URL")  
       
     if st.button("Predict"): 
         result = prediction(URL) 
         if(int(result) != -2):
             st.success('Product Score is {:.1f} stars'.format(result))
+        elif(int(result) == -3):
+           st.success('Something went wrong please try again')
         else:
             st.success('Product Not Found!')
     
