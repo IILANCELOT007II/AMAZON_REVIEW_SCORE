@@ -95,20 +95,21 @@ def main():
     st.markdown(html_temp, unsafe_allow_html = True) 
       
     URL = st.text_input("Enter Amazon Product Link:")
-    if(len(URL)==0):
-        st.success("Please enter a URL")
-      
-    if('amazon' not in URL):
-        st.success("Please enter a valid Amazon URL")  
+    
       
     if st.button("Predict"): 
+        if(len(URL)==0):
+            st.warning("Please enter a URL")
+    
+        if('amazon' not in URL):
+            st.warning("Please enter a valid Amazon URL")  
         result = prediction(URL) 
         if(int(result) != -2):
             st.success('Product Score is {:.1f} stars'.format(result))
         elif(int(result) == -3):
-           st.success('Something went wrong please try again')
+           st.warning('Something went wrong please try again')
         else:
-            st.success('Product Not Found!')
+            st.warning('Product Not Found!')
     
     
      
