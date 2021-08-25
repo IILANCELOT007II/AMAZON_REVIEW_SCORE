@@ -36,7 +36,7 @@ def prediction(URL):
             
             if(str(e) == "HTTP Error 404: Not Found" ):
                 return -2
-            return -3
+            
         
         
         scraper = BeautifulSoup(url_access,'html.parser')
@@ -111,9 +111,6 @@ def main():
         if(int(result) == -2):
             st.warning('Product Not Found!')
             st.stop()
-        elif(int(result) == -3):
-           st.warning('Something went wrong please try again')
-           st.stop()
         else:
             st.success('Product Score is {:.1f} stars'.format(result))
             
