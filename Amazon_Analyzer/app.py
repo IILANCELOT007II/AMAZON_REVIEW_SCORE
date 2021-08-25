@@ -16,14 +16,10 @@ nltk.downloader.download('vader_lexicon')
  
 @st.cache()
   
-def prediction(URL):
+def prediction(asin):
     
     review=[]
     clean_review = []
-    
-    l1 = URL.split("/")
-    key = l1.index("dp")
-    asin = l1[key+1]
     
     for i in range(2,5):
         try:
